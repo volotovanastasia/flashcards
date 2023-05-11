@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FlashcardWindow</class>
+ <widget class="QMainWindow" name="FlashcardWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>796</width>
+    <height>551</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Приложение для ведения конспектов и последующего автоматического перехода записей в карточки для заучивания материала</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>120</y>
+      <width>411</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>409</width>
+       <height>269</height>
+      </rect>
+     </property>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>-10</x>
+        <y>0</y>
+        <width>431</width>
+        <height>291</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="flashcard">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>411</width>
+         <height>271</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <stylestrategy>PreferDefault</stylestrategy>
+        </font>
+       </property>
+       <property name="text">
+        <string>Question
+</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>791</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="notesName">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>50</y>
+      <width>791</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 36pt &quot;.AppleSystemUIFont&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Note's Name</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nextPushButton">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>410</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Next</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="rotationPushButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>410</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Rotation</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>796</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

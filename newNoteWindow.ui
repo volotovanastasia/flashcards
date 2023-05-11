@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NewNoteWindow</class>
+ <widget class="QMainWindow" name="NewNoteWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>796</width>
+    <height>525</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Приложение для ведения конспектов и последующего автоматического перехода записей в карточки для заучивания материала</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="additionalInfo">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>310</y>
+      <width>231</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18pt &quot;.AppleSystemUIFont&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Additional Information</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saveButton">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>413</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save note</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="additionalInfoTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>360</y>
+      <width>601</width>
+      <height>79</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="noteNameTextEdit">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>50</y>
+      <width>321</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 13pt &quot;.AppleSystemUIFont&quot;;</string>
+    </property>
+    <property name="plainText">
+     <string>Enter the name of the new note</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addFilePushButton">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>170</y>
+      <width>193</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 18pt &quot;.AppleSystemUIFont&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Add file</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>160</y>
+      <width>501</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 0, 33)</string>
+    </property>
+    <property name="text">
+     <string>!!!
+Remember that only the first two columns of your file will be converted into a note.
+The first will be the question, and the second will be the answer
+Upload the file in the format .csv</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>796</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
