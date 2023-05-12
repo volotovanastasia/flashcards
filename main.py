@@ -21,7 +21,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def openNewNoteWindow(self):
         self.window_crete_new_note_dialog = NewNoteWindow()
         self.window_crete_new_note_dialog.show()
-        # when window closed update notes and buttons
 
     def createNotesAndButtons(self):
         con = sqlite3.connect('flashcards.db')
@@ -45,7 +44,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.layout.addWidget(self.editButton)
             self.scrollAreaWidgetContents.setLayout(self.layout)
 
-
     def openNote(self, name):
         self.noteWindow = NoteWindow()
         self.noteWindow.notesName.setText(name)
@@ -55,7 +53,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def openFlashcard(self, name):
         con = sqlite3.connect('flashcards.db')
         cur = con.cursor()
-        if cur.execute("""select count_of_questions from main_information where name_of_note = ?""", (name,)).fetchone()[0] == 0:
+        if cur.execute("""select count_of_questions from main_information where name_of_note = ?""",
+                       (name,)).fetchone()[0] == 0:
             self.error_dialog = QErrorMessage()
             self.error_dialog.showMessage('This note is empty.\nPlease, add some questions.')
         else:

@@ -22,9 +22,9 @@ class FlashcardWindow(QMainWindow, Ui_FlashcardWindow):
         con = sqlite3.connect('flashcards.db')
         cur = con.cursor()
         n = (1 if (cur.execute("""select count_of_questions from main_information where name_of_note = ?""",
-                                (self.notesName.text(),)).fetchone()) is None else cur.execute(
+                               (self.notesName.text(),)).fetchone()) is None else cur.execute(
             """select count_of_questions from main_information where name_of_note = ?""",
-            (self.notesName.text(),)).fetchone()[0])
+            (self.notesName.text(),)).fetchone()[0] - 1)
         self.rotationPushButton.clicked.connect(self.rotateFlashcard)
         self.nextPushButton.clicked.connect(self.showNext)
         self.progressBar.setValue(0)
@@ -32,38 +32,41 @@ class FlashcardWindow(QMainWindow, Ui_FlashcardWindow):
         self.progressBar.setMinimum(0)
         self.order = (True if self.result == QMessageBox.Yes else False)
         if self.order:
-            self.random_list = list(range(0, n))
+            self.random_list = list(range(0, n + 1))
             random.shuffle(self.random_list)
-            self.flashcard.setText("Question\n" + ("" if cur.execute("""select question from notes where number_qa = 
-            ?""",  (self.random_list[self.number_of_question],)).fetchone() is None else cur.execute(
-                    """select question from notes where number_qa = ?""",
-                    (self.random_list[self.number_of_question],)).fetchone()[0]))
+            self.flashcard.setText("Question\n" + ("" if cur.execute("""select question from notes where number_qa = ?
+             and notes_name = ?""", (self.random_list[self.number_of_question], self.notesName.text())).fetchone() is None
+                                                   else cur.execute(
+                """select question from notes where number_qa = ? and notes_name = ?""",
+                (self.random_list[self.number_of_question], self.notesName.text())).fetchone()[0]))
         else:
-            self.flashcard.setText("Question\n" + ("" if cur.execute("""select question from notes where number_qa =
-            ?""", (self.number_of_question,)).fetchone() is None else cur.execute(
-                    """select question from notes where number_qa = ?""", (self.number_of_question,)).fetchone()[0]))
+            self.flashcard.setText("Question\n" + ("" if cur.execute("""select question from notes where number_qa = ?
+                and notes_name = ?""", (self.number_of_question, self.notesName.text())).fetchone() is None else cur.
+                                                         execute("""select question from notes where number_qa = ? 
+                                                         and notes_name = ?""", (self.number_of_question,
+                                                                                 self.notesName.text())).fetchone()[0]))
 
     def rotateFlashcard(self):
         con = sqlite3.connect('flashcards.db')
         cur = con.cursor()
         if self.flashcard.text()[0] == 'Q':
-            self.flashcard.setText("Answer\n" + ("" if cur.execute("""select answer from notes where number_qa = ?""",
-                                                                    (self.number_of_question,)).fetchone() is None else
-                                                  cur.execute("""select answer from notes where number_qa = ?""",
-                                                              (self.number_of_question,)).fetchone()[0]))
+            self.flashcard.setText(
+                "Answer\n" + ("" if cur.execute("""select answer from notes where number_qa = ? and notes_name = ?""",
+                                                (
+                                                self.number_of_question, self.notesName.text())).fetchone() is None else
+                              cur.execute(
+                                  """select answer from notes where number_qa = ? and notes_name = ?""",
+                                  (self.number_of_question, self.notesName.text())).fetchone()[0]))
         else:
             self.flashcard.setText("Question\n" + ("" if cur.execute("""select question from notes where number_qa = 
-            ?""", (self.number_of_question,)).fetchone() is None else cur.execute("""select question from notes where 
-            number_qa = ?""", (self.number_of_question,)).fetchone()[0]))
+            ? and notes_name = ?""", (self.number_of_question, self.notesName.text())).fetchone() is None else cur.execute(
+                """select question from notes where number_qa = ? and notes_name = ?""",
+                (self.number_of_question, self.notesName.text())).fetchone()[0]))
 
     def showNext(self):
         con = sqlite3.connect('flashcards.db')
         cur = con.cursor()
         self.number_of_question += 1
-        print(self.number_of_question)
-        print(cur.execute(
-                """select count_of_questions from main_information where name_of_note = ?""",
-                (self.notesName.text(),)).fetchone()[0])
         if self.number_of_question == cur.execute(
                 """select count_of_questions from main_information where name_of_note = ?""",
                 (self.notesName.text(),)).fetchone()[0]:
@@ -76,13 +79,17 @@ class FlashcardWindow(QMainWindow, Ui_FlashcardWindow):
         else:
             if self.order:
                 self.flashcard.setText("Question\n" + ("" if cur.execute("""select question from notes where number_qa =
-                ?""", (self.random_list[self.number_of_question],)).fetchone() is None else cur.execute(
-                    """select question from notes where number_qa = ?""",
-                    (self.random_list[self.number_of_question],)).fetchone()[0]))
+                ? and notes_name = ?""", (self.random_list[self.number_of_question - 1], self.notesName.text())).fetchone() is
+                                                             None else cur.execute(
+                    """select question from notes where number_qa = ? and notes_name = ?""",
+                    (self.random_list[self.number_of_question], self.notesName.text())).fetchone()[
+                    0]))
             else:
                 self.flashcard.setText("Question\n" + ("" if cur.execute("""select question from notes where number_qa =
-                ?""", (self.number_of_question,)).fetchone() is None else cur.execute(
-                    """select question from notes where number_qa = ?""", (self.number_of_question,)).fetchone()[0]))
+                ? and notes_name = ?""", (self.number_of_question, self.notesName.text())).fetchone() is None else cur.
+                                                       execute("""select question from notes where number_qa = ? and
+                                                        notes_name = ?""", (self.number_of_question,
+                                                                            self.notesName.text())).fetchone()[0]))
             self.progressBar.setValue(self.number_of_question)
 
 

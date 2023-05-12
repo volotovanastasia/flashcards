@@ -10,6 +10,7 @@ class NoteWindow(QMainWindow, Ui_NoteWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.changes = []
 
     def initUI(self):
         self.startStudyPushButton.clicked.connect(self.openFlashcardWindow)
@@ -27,7 +28,6 @@ class NoteWindow(QMainWindow, Ui_NoteWindow):
         name_of_note = ?""", (self.notesName.text(),)).fetchone()[0])
         self.number_of_rows = cur.execute("""select count_of_questions from main_information where name_of_note = ?""",
                                           (self.notesName.text(),)).fetchone()[0]
-        self.changes = []
         self.qaTable.cellChanged.connect(self.cellChanged)
 
     def openFlashcardWindow(self):
@@ -49,7 +49,7 @@ class NoteWindow(QMainWindow, Ui_NoteWindow):
     def cellChanged(self, row, column):
         if row not in self.changes:
             self.changes.append(row)
-        if row + 1 >= self.number_of_rows:
+        if row == self.number_of_rows:
             self.qaTable.setRowCount(self.qaTable.rowCount() + 1)
             self.number_of_rows += 1
 

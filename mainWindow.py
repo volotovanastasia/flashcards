@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.setFixedSize(800, 600)
+        MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.newNotePushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.newNotePushButton.setGeometry(QtCore.QRect(570, 20, 113, 32))
+        self.newNotePushButton.setGeometry(QtCore.QRect(680, 20, 113, 32))
         self.newNotePushButton.setObjectName("newNotePushButton")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(10, 10, 371, 51))
@@ -40,9 +40,6 @@ class Ui_MainWindow(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.updatePushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.updatePushButton.setGeometry(QtCore.QRect(680, 20, 113, 32))
-        self.updatePushButton.setObjectName("updatePushButton")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 24))
@@ -60,7 +57,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Приложение для ведения конспектов и последующего автоматического перехода записей в карточки для заучивания материала"))
         self.newNotePushButton.setText(_translate("MainWindow", "New note"))
         self.label.setText(_translate("MainWindow", "All your notes:"))
-        self.updatePushButton.setText(_translate("MainWindow", "Update"))
 
 
 if __name__ == "__main__":

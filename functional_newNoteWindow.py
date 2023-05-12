@@ -42,24 +42,24 @@ class NewNoteWindow(QMainWindow, Ui_NewNoteWindow):
             else:
                 with open(self.addFilePushButton.text(), 'r') as file:
                     lines = csv.reader(file, delimiter=';')
+                    lines = list(lines)
                     for i in range(len(lines)):
-                        if len(lines[i].split(',')) == 1:
+                        if len(lines[i]) == 1:
                             cur.execute("""insert into notes(notes_name, number_qa, question, answer) 
                             values(?, ?, ?, ?)""",
-                                        (self.noteNameTextEdit.toPlainText(), i, lines[i].split(',')[0], ""))
+                                        (self.noteNameTextEdit.toPlainText(), i, lines[i][0], ""))
                         else:
-                            cur.execute("""insert into notes(notes_name, number_of_string, question, answer) 
+                            cur.execute("""insert into notes(notes_name, number_qa, question, answer) 
                             values(?, ?, ?, ?)""",
-                                        (self.noteNameTextEdit.toPlainText(), i, lines[i].split(',')[0],
-                                         lines[i].split(',')[1]))
-                cur.execute("""insert into main_information(name_of_note, additional_info, count_of_questions) values(?, 
-                ?, ?)""",
-                            (self.noteNameTextEdit.toPlainText(), self.additionalInfoTextEdit.toPlainText(),
-                             len(lines)))
+                                        (self.noteNameTextEdit.toPlainText(), i, lines[i][0],
+                                         lines[i][1]))
+                cur.execute("""insert into main_information(name_of_note, additional_info, count_of_questions) values(?,
+                ?, ?)""", (self.noteNameTextEdit.toPlainText(), self.additionalInfoTextEdit.toPlainText(), len(lines)))
                 file.close()
             con.commit()
             self.window_note = NoteWindow()
             self.window_note.notesName.setText(self.noteNameTextEdit.toPlainText())
+            self.window_note.initUI()
             self.window_note.additionalInfoTextEdit.setText(self.additionalInfoTextEdit.toPlainText())
             self.window_note.show()
             self.close()
